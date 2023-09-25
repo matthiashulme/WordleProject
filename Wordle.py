@@ -8,7 +8,8 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 import random
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, CORRECT_COLOR, MISSING_COLOR, PRESENT_COLOR, N_COLS, N_ROWS
+from WordleGraphics import WordleGWindow, CORRECT_COLOR, MISSING_COLOR, PRESENT_COLOR, SKY_BLUE, DARK_BLUE, N_COLS, N_ROWS
+
 
 
 def wordle():
@@ -19,7 +20,35 @@ def wordle():
     HardMode = False
     GreenLetters = ['','','','','']
     YellowLetters = []
-    
+    byu = False
+    def changeColor(byu, BYU):
+        byu1 = byu
+        if byu == BYU:
+            byu1 = False
+        else:
+            byu1 = True
+        if byu1:
+            for i in range(0,5):
+                for x in range(0,5):
+                    color = gw.get_square_color(i,x)
+                    if color == CORRECT_COLOR:
+                        gw.set_square_color(i,x, DARK_BLUE)
+                    elif color == PRESENT_COLOR:
+                        gw.set_square_color(i,x, SKY_BLUE)
+                    elif color == MISSING_COLOR:
+                        gw.set_square_color(i,x, MISSING_COLOR)
+        else:
+            for i in range(0,5):
+                for x in range(0,5):
+                    color = gw.get_square_color(i,x)
+                    if color == DARK_BLUE:
+                        gw.set_square_color(i,x, CORRECT_COLOR)
+                    elif color == SKY_BLUE:
+                        gw.set_square_color(i,x, PRESENT_COLOR)
+                    elif color == MISSING_COLOR:
+                        gw.set_square_color(i,x, MISSING_COLOR)
+        
+                    
     def enter_action(GuessWord):
         
         HardMode = gw.get_hard_mode()

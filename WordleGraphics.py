@@ -21,7 +21,8 @@ PRESENT_COLOR = "#CCBB66"       # Brownish yellow for misplaced letters
 MISSING_COLOR = "#999999"       # Gray for letters that don't appear
 UNKNOWN_COLOR = "#FFFFFF"       # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"           # Keys are colored light gray
-
+DARK_BLUE = "#000080"
+SKY_BLUE = "#87CEEB"
 CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700		# Height of the tkinter canvas (pixels)
 
