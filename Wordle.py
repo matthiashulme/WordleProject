@@ -16,12 +16,15 @@ def wordle():
     ActualWord = random.choice(FIVE_LETTER_WORDS)
     print(ActualWord)
 
-    HardMode = True
+    HardMode = False
     GreenLetters = ['','','','','']
     YellowLetters = []
     
     def enter_action(GuessWord):
         
+        HardMode = gw.get_hard_mode()
+        ByuMode = gw.get_byumode()
+
         row = gw.get_current_row()
         GuessWord = GuessWord.lower()
 
