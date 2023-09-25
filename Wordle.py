@@ -8,7 +8,8 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 import random
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, CORRECT_COLOR, MISSING_COLOR, PRESENT_COLOR, N_COLS, N_ROWS
+from WordleGraphics import WordleGWindow, CORRECT_COLOR, MISSING_COLOR, PRESENT_COLOR, SKY_BLUE, DARK_BLUE, N_COLS, N_ROWS
+
 
 
 def wordle():
@@ -19,7 +20,7 @@ def wordle():
     HardMode = True
     GreenLetters = ['','','','','']
     YellowLetters = []
-        byu = False
+    byu = False
     def changeColor(byu, BYU):
         byu1 = byu
         if byu == BYU:
