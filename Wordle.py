@@ -8,7 +8,7 @@ BE SURE TO UPDATE THIS COMMENT WHEN YOU WRITE THE CODE.
 import random
 
 from WordleDictionary import FIVE_LETTER_WORDS
-from WordleGraphics import WordleGWindow, CORRECT_COLOR, MISSING_COLOR, PRESENT_COLOR, SKY_BLUE, DARK_BLUE, N_COLS, N_ROWS
+from WordleGraphics import WordleGWindow, CORRECT_COLOR, MISSING_COLOR, PRESENT_COLOR, ROYAL_COLOR, NAVY_COLOR, N_COLS, N_ROWS
 
 
 
@@ -18,7 +18,8 @@ def wordle():
     ActualWord = random.choice(FIVE_LETTER_WORDS)
     print(ActualWord)
 
-    HardMode = False
+    PreviousHardMode = False
+    PreviousByuMode = False
     GreenLetters = ['','','','','']
     YellowLetters = []
 
@@ -28,12 +29,12 @@ def wordle():
             for x in range(0,5):
                 color = gw.get_square_color(i,x)
                 if color == CORRECT_COLOR:
-                    gw.set_square_color(i,x, DARK_BLUE)
-                elif color == DARK_BLUE:
+                    gw.set_square_color(i,x, NAVY_COLOR)
+                elif color == NAVY_COLOR:
                     gw.set_square_color(i,x, CORRECT_COLOR)
                 elif color == PRESENT_COLOR:
-                    gw.set_square_color(i,x, SKY_BLUE)
-                elif color == SKY_BLUE:
+                    gw.set_square_color(i,x, ROYAL_COLOR)
+                elif color == ROYAL_COLOR:
                     gw.set_square_color(i,x, PRESENT_COLOR)
                 elif color == MISSING_COLOR:
                     gw.set_square_color(i,x, MISSING_COLOR)
@@ -51,11 +52,18 @@ def wordle():
                     
     def enter_action(GuessWord):
 
-
-
-        
+        nonlocal PreviousByuMode
+        nonlocal PreviousHardMode
         HardMode = gw.get_hardmode()
         ByuMode = gw.get_byumode()
+        if ByuMode != PreviousByuMode:
+            changeColor()
+            gw.show_message("Color has changed to Byu Mode")
+        if HardMode != PreviousHardMode:
+            gw.show_message("You are on hard mode")
+        PreviousByuMode = ByuMode
+        PreviousHardMode = HardMode
+
 
 
         row = gw.get_current_row()
@@ -82,7 +90,7 @@ def wordle():
             for i in range(0,5):
                 if (GuessWord[i] == ActualWord[i]):
                     if ByuMode:
-                        gw.set_square_color(row, i, DARK_BLUE)
+                        gw.set_square_color(row, i, NAVY_COLOR)
                     else:
                          gw.set_square_color(row, i, CORRECT_COLOR)
                     GreenLetters[i] = GuessWord[i]
@@ -92,7 +100,7 @@ def wordle():
             for i in range(0,5):
                 if (GuessWord[i] in ActualWord and counterMap[GuessWord[i]] > 0):
                     if ByuMode:
-                        gw.set_square_color(row, i, SKY_BLUE)
+                        gw.set_square_color(row, i, ROYAL_COLOR)
                     else:
                         gw.set_square_color(row, i, PRESENT_COLOR)
                     YellowLetters.append(GuessWord[i])

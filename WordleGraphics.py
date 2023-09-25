@@ -22,8 +22,8 @@ PRESENT_COLOR = "#CCBB66"       # Brownish yellow for misplaced letters
 MISSING_COLOR = "#999999"       # Gray for letters that don't appear
 UNKNOWN_COLOR = "#FFFFFF"       # Undetermined letters are white
 KEY_COLOR = "#DDDDDD"           # Keys are colored light gray
-DARK_BLUE = "#000080"
-SKY_BLUE = "#87CEEB"
+NAVY_COLOR = "#000080"
+ROYAL_COLOR = "#4169E1"
 CANVAS_WIDTH = 500		# Width of the tkinter canvas (pixels)
 CANVAS_HEIGHT = 700		# Height of the tkinter canvas (pixels)
 
@@ -164,14 +164,16 @@ class WordleGWindow:
                 btn1['state'] = tkinter.NORMAL
                 self._byumode = True
 
+
         def changeStateBtn2(): 
             if (btn2['state'] == tkinter.NORMAL): 
                 btn2['state'] = tkinter.DISABLED 
-                self._byumode = False
+                self._hardmode = False
 
             else: 
                 btn2['state'] = tkinter.NORMAL
-                self._byumode = True
+                self._hardmode = True
+
 
 
 
@@ -188,8 +190,10 @@ class WordleGWindow:
 
         canvas.pack()
 
-        btn1 = Button(root, text="BYU Mode", command=changeStateBtn1).pack(side = tkinter.LEFT) 
-        btn2 = Button(root, text="Hard Mode", command=changeStateBtn2).pack(side = tkinter.RIGHT)
+        btn1 = Button(root, text="BYU Mode", command=changeStateBtn1)
+        btn1.pack(side = tkinter.LEFT) 
+        btn2 = Button(root, text="Hard Mode", command=changeStateBtn2)
+        btn2.pack(side = tkinter.RIGHT)
 
         self._canvas = canvas
         self._grid = create_grid()
