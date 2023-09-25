@@ -50,7 +50,14 @@ def wordle():
         
                     
     def enter_action(GuessWord):
-        ByuMode = True
+
+
+
+        
+        HardMode = gw.get_hardmode()
+        ByuMode = gw.get_byumode()
+
+
         row = gw.get_current_row()
         GuessWord = GuessWord.lower()
 

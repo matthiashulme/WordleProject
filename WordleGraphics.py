@@ -9,6 +9,7 @@ import atexit
 import math
 import time
 import tkinter
+from tkinter.ttk import Button, Label
 
 
 # Constants
@@ -153,6 +154,25 @@ class WordleGWindow:
         def start_event_loop():
             """Starts the tkinter event loop when the program exits."""
             root.mainloop()
+        
+        def changeStateBtn1(): 
+            if (btn1['state'] == tkinter.NORMAL): 
+                btn1['state'] = tkinter.DISABLED 
+                self._byumode = False
+
+            else: 
+                btn1['state'] = tkinter.NORMAL
+                self._byumode = True
+
+        def changeStateBtn2(): 
+            if (btn2['state'] == tkinter.NORMAL): 
+                btn2['state'] = tkinter.DISABLED 
+                self._byumode = False
+
+            else: 
+                btn2['state'] = tkinter.NORMAL
+                self._byumode = True
+
 
 
         root = tkinter.Tk()
@@ -167,6 +187,10 @@ class WordleGWindow:
                                 highlightthickness=0)
 
         canvas.pack()
+
+        btn1 = Button(root, text="BYU Mode", command=changeStateBtn1).pack(side = tkinter.LEFT) 
+        btn2 = Button(root, text="Hard Mode", command=changeStateBtn2).pack(side = tkinter.RIGHT)
+
         self._canvas = canvas
         self._grid = create_grid()
         self._message = create_message()
@@ -177,6 +201,8 @@ class WordleGWindow:
         root.bind("<ButtonRelease-1>", release_action)
         self._row = 0
         self._col = 0
+        self._hardmode = False
+        self._byumode = False
         atexit.register(start_event_loop)
 
     def get_square_letter(self, row, col):
@@ -206,13 +232,18 @@ class WordleGWindow:
         for col in range(N_COLS):
             self.set_square_letter(row, col, " ")
             self.set_square_color(row, col, UNKNOWN_COLOR)
+    
+    def get_hardmode(self):
+        return self._hardmode
+    
+    def get_byumode(self):
+        return self._byumode
 
     def add_enter_listener(self, fn):
         self._enter_listeners.append(fn)
 
     def show_message(self, msg, color="Black"):
         self._message.set_text(msg, color)
-
 
 class WordleSquare:
 
