@@ -19,7 +19,35 @@ def wordle():
     HardMode = True
     GreenLetters = ['','','','','']
     YellowLetters = []
-    
+        byu = False
+    def changeColor(byu, BYU):
+        byu1 = byu
+        if byu == BYU:
+            byu1 = False
+        else:
+            byu1 = True
+        if byu1:
+            for i in range(0,5):
+                for x in range(0,5):
+                    color = gw.get_square_color(i,x)
+                    if color == CORRECT_COLOR:
+                        gw.set_square_color(i,x, DARK_BLUE)
+                    elif color == PRESENT_COLOR:
+                        gw.set_square_color(i,x, SKY_BLUE)
+                    elif color == MISSING_COLOR:
+                        gw.set_square_color(i,x, MISSING_COLOR)
+        else:
+            for i in range(0,5):
+                for x in range(0,5):
+                    color = gw.get_square_color(i,x)
+                    if color == DARK_BLUE:
+                        gw.set_square_color(i,x, CORRECT_COLOR)
+                    elif color == SKY_BLUE:
+                        gw.set_square_color(i,x, PRESENT_COLOR)
+                    elif color == MISSING_COLOR:
+                        gw.set_square_color(i,x, MISSING_COLOR)
+        
+                    
     def enter_action(GuessWord):
         
         row = gw.get_current_row()
