@@ -10,6 +10,7 @@ import math
 import time
 import tkinter
 
+
 # Constants
 
 N_ROWS = 6			# Number of rows
@@ -64,6 +65,8 @@ class WordleGWindow:
 
     def __init__(self):
         """Creates the Wordle window."""
+        
+
 
         def create_grid():
             return [
@@ -71,6 +74,7 @@ class WordleGWindow:
                     WordleSquare(canvas, i, j) for j in range(N_COLS)
                 ] for i in range(N_ROWS)
             ]
+        
 
         def create_keyboard():
             keys = { }
@@ -150,7 +154,9 @@ class WordleGWindow:
             """Starts the tkinter event loop when the program exits."""
             root.mainloop()
 
+
         root = tkinter.Tk()
+
         root.title("Wordle")
         root.protocol("WM_DELETE_WINDOW", delete_window)
         self._root = root
@@ -159,6 +165,7 @@ class WordleGWindow:
                                 width=CANVAS_WIDTH,
                                 height=CANVAS_HEIGHT,
                                 highlightthickness=0)
+
         canvas.pack()
         self._canvas = canvas
         self._grid = create_grid()

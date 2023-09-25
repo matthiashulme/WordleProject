@@ -12,45 +12,45 @@ from WordleGraphics import WordleGWindow, CORRECT_COLOR, MISSING_COLOR, PRESENT_
 
 
 
+
 def wordle():
     ActualWord = ""
     ActualWord = random.choice(FIVE_LETTER_WORDS)
     print(ActualWord)
 
-    HardMode = True
+    HardMode = False
     GreenLetters = ['','','','','']
     YellowLetters = []
-    byu = False
-    def changeColor(byu, BYU):
-        byu1 = byu
-        if byu == BYU:
-            byu1 = False
-        else:
-            byu1 = True
-        if byu1:
-            for i in range(0,5):
-                for x in range(0,5):
-                    color = gw.get_square_color(i,x)
-                    if color == CORRECT_COLOR:
-                        gw.set_square_color(i,x, DARK_BLUE)
-                    elif color == PRESENT_COLOR:
-                        gw.set_square_color(i,x, SKY_BLUE)
-                    elif color == MISSING_COLOR:
-                        gw.set_square_color(i,x, MISSING_COLOR)
-        else:
-            for i in range(0,5):
-                for x in range(0,5):
-                    color = gw.get_square_color(i,x)
-                    if color == DARK_BLUE:
-                        gw.set_square_color(i,x, CORRECT_COLOR)
-                    elif color == SKY_BLUE:
-                        gw.set_square_color(i,x, PRESENT_COLOR)
-                    elif color == MISSING_COLOR:
-                        gw.set_square_color(i,x, MISSING_COLOR)
+
+
+    def changeColor():
+        for i in range(0,5):
+            for x in range(0,5):
+                color = gw.get_square_color(i,x)
+                if color == CORRECT_COLOR:
+                    gw.set_square_color(i,x, DARK_BLUE)
+                elif color == DARK_BLUE:
+                    gw.set_square_color(i,x, CORRECT_COLOR)
+                elif color == PRESENT_COLOR:
+                    gw.set_square_color(i,x, SKY_BLUE)
+                elif color == SKY_BLUE:
+                    gw.set_square_color(i,x, PRESENT_COLOR)
+                elif color == MISSING_COLOR:
+                    gw.set_square_color(i,x, MISSING_COLOR)
+        # else:
+        #     for i in range(0,5):
+        #         for x in range(0,5):
+        #             color = gw.get_square_color(i,x)
+        #             if color == DARK_BLUE:
+        #                 gw.set_square_color(i,x, CORRECT_COLOR)
+        #             elif color == SKY_BLUE:
+        #                 gw.set_square_color(i,x, PRESENT_COLOR)
+        #             elif color == MISSING_COLOR:
+        #                 gw.set_square_color(i,x, MISSING_COLOR)
         
                     
     def enter_action(GuessWord):
-        
+        ByuMode = True
         row = gw.get_current_row()
         GuessWord = GuessWord.lower()
 
@@ -66,22 +66,32 @@ def wordle():
         elif (HardModeCheck(GuessWord) == False and HardMode != False):
             gw.show_message("Must Include Previous Hints in Guess!")
         else:
+            # if byuColor:
+            #     byuColor = False
+            #     changeColor()
+            # else:
+            #     byuColor = True
+            #     changeColor()
             for i in range(0,5):
                 if (GuessWord[i] == ActualWord[i]):
-                    gw.set_square_color(row, i, CORRECT_COLOR)
+                    if ByuMode:
+                        gw.set_square_color(row, i, DARK_BLUE)
+                    else:
+                         gw.set_square_color(row, i, CORRECT_COLOR)
                     GreenLetters[i] = GuessWord[i]
                     counterMap[GuessWord[i]] -= 1
                 else:
                     gw.set_square_color(row, i, MISSING_COLOR)
             for i in range(0,5):
                 if (GuessWord[i] in ActualWord and counterMap[GuessWord[i]] > 0):
-                    gw.set_square_color(row, i, PRESENT_COLOR)
+                    if ByuMode:
+                        gw.set_square_color(row, i, SKY_BLUE)
+                    else:
+                        gw.set_square_color(row, i, PRESENT_COLOR)
                     YellowLetters.append(GuessWord[i])
                     counterMap[GuessWord[i]] -= 1
-    
             if GuessWord.lower() == ActualWord.lower():
                 gw.show_message("Correct you win!")
-
             elif row == 5:
                 gw.show_message("You lose. Correct word was " + ActualWord)
 
